@@ -4,21 +4,29 @@ interface ProductsListProps {
 }
 const initialProducts = [
     { title: 'Escape from Trakov', price: 60, id: 'eft'},
-    { title: 'Hunt: Showdown', price: 70, id: 'hunt'}, 
-    { title: 'Hell let Loose', price: 55, id: 'hll'}
+    { title: 'Hunt Showdown', price: 70, id: 'hunt'}, 
+    { title: 'Hell let Loose', price: 55, id: 'hl'}
 ]
-
+interface Product {
+    title : string,
+    price : number;
+    id : string;
+}
 
 const ProductsList: React.FC<ProductsListProps> = ({}) => {
- const [products, setProducts] =useState(initialProducts)
+ const [products, setProducts] = useState<Product[]>(initialProducts)
     return (
-        <div className='App'>
+        <div>
             <h2>Games</h2>
-            {initialProducts.map(product => <div key = {product.id} >
+            {products.map(product => <div key = {product.id}>
                 <span>{`${product.title} : ${product.price}`}</span>
             </div>
             )}
-            <button>Add Product</button>
+            <button onClick={()=>setProducts(prevProducts=>[{
+                title: 'Half Life',
+                price : 100,
+                id: 'hl'
+            }, ...prevProducts])}>Add Product</button>
         </div>
     );
 
